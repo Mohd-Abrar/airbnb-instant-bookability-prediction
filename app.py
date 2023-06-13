@@ -383,7 +383,7 @@ df = pd.concat([data_1,data_2],axis=1)
 
 # Model prediction
 prediction = cat_boost.predict(df)
-if st.button('predict'):
+if st.button('Know your status'):
     if prediction ==1 :
         st.success('Your property is instantly bookable')
     else:
