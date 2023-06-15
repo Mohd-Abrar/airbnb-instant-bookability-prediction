@@ -6,7 +6,7 @@ import pickle
 import base64
 
 
-with open("image1.jpg", "rb") as image_file:
+with open("image8.jpg", "rb") as image_file:
     encoded_string = base64.b64encode(image_file.read())
 st.markdown(
 f"""
@@ -98,8 +98,8 @@ with open('model_catboost.pickle','rb') as file:
     
 # Getting user input
 
-host_response_time = st.selectbox('Select response time',('unknown', 'within a day', 'within an hour', 'within a few hours',
-       'a few days or more'))
+host_response_time = st.selectbox('Select response time',('unknown', 'within a day', 'within an hour',
+                                                          'within a few hours','a few days or more'))
 host_response_rate = st.slider('Your response rate',1,100,1)
 host_acceptance_rate = st.slider('Your acceptance rate',1,100,1)
 host_is_superhost = st.selectbox('Your superhost status',('Yes','No'))
@@ -334,8 +334,9 @@ min_nights = st.slider('Minimum nights allowed',1,50,1)
 
 region = st.selectbox('Enter your region',('East', 'North', 'West', 'South'))
 
-amenities = st.multiselect('Select amenities',('long term stay','parking','hanger','hair dryer','tv','wifi','iron','washer','water heating','workspace','kitchen essential',
-'fire alarm'))
+amenities = st.multiselect('Select amenities',('long term stay','parking','hanger','hair dryer','tv','wifi',
+                                               'iron','washer','water heating','workspace','kitchen essential',
+                                               'fire alarm'))
 
 
 # Applying encoding ,transformation,scaling on user data
@@ -346,9 +347,11 @@ scale_act_rate = scal_accet_rate.transform(pd.DataFrame([host_acceptance_rate]))
 encode_superhost = [1 if host_is_superhost == "Yes" else 0]
 trans_list_count = trans_host_listing_count.transform(pd.DataFrame([host_total_listings_count]))
 encode_id_verified = [1 if host_identity_verified == "Yes" else 0]
-encode_neighbourhood = en_neighbourhood.transform(pd.DataFrame({"neighbourhood" :[neighbourhood]}))
+encode_neighbourhood = en_neighbourhood.transform(pd.DataFrame({"neighbourhood" :
+                                                                [neighbourhood]}))
 encode_city = en_city.transform(pd.DataFrame({"city" :[city]}))
-encode_property_type = en_property_type.transform(pd.DataFrame({"property_type" :[property_type]}))
+encode_property_type = en_property_type.transform(pd.DataFrame({"property_type" :
+                                                                [property_type]}))
 encode_room_type = en_room_type.transform(pd.DataFrame([room_type]))
 trans_acc = trans_accommodates.transform(pd.DataFrame([accommodates]))
 trans_bed = trans_bedroom.transform(pd.DataFrame([bedrooms]))
